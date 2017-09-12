@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Vision vision;
     TextView result;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         result=(TextView) findViewById(R.id.result);
+        imageView=(ImageView) findViewById(R.id.imageView);
+
+
+        imageView.setImageResource(R.drawable.pizza);
 
 
         Vision.Builder visionBuilder = new Vision.Builder(new NetHttpTransport(), new AndroidJsonFactory(),null);
@@ -85,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
 //                    for faces
 //                    final List<FaceAnnotation> res = batchResponse.getResponses();
-                    
+
 
                     for(int i=0;i<responses.get(0).getLabelAnnotations().size();i++){
                         message+="Description:"+ responses.get(0).getLabelAnnotations().get(i).getDescription()+"\n";
