@@ -5,25 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.zcorp.app.foodvision.MainActivity">
+    android:background="#eee"
+    tools:context="com.zcorp.app.foodvision.Activities.MainActivity">
 
     <LinearLayout
         android:orientation="vertical"
+        android:background="#eee"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
+        android:layout_marginBottom="30dp"
         android:layout_height="200dp" />
 
+        <android.support.v7.widget.RecyclerView
+            android:nestedScrollingEnabled="false"
+            android:id="@+id/description_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/result"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp" />
+        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 

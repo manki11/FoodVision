@@ -1,9 +1,11 @@
-package com.zcorp.app.foodvision;
+package com.zcorp.app.foodvision.Activities;
 
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,27 +23,33 @@ import com.google.api.services.vision.v1.model.EntityAnnotation;
 import com.google.api.services.vision.v1.model.FaceAnnotation;
 import com.google.api.services.vision.v1.model.Feature;
 import com.google.api.services.vision.v1.model.Image;
+import com.zcorp.app.foodvision.Adapters.Description_RV_Adatper;
+import com.zcorp.app.foodvision.Data.Cloud_Data;
+import com.zcorp.app.foodvision.R;
 
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private Vision vision;
-    TextView result;
     ImageView imageView;
+    RecyclerView description_rv;
+    ArrayList<Cloud_Data> data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        result=(TextView) findViewById(R.id.result);
         imageView=(ImageView) findViewById(R.id.imageView);
+        description_rv=(RecyclerView) findViewById(R.id.description_rv);
+        data=new ArrayList<>();
 
 
         imageView.setImageResource(R.drawable.pizza);
@@ -97,6 +105,12 @@ public class MainActivity extends AppCompatActivity {
                         message+="Description:"+ responses.get(0).getLabelAnnotations().get(i).getDescription()+"\n";
                         message+="Score:"+ responses.get(0).getLabelAnnotations().get(i).getScore()+"\n\n";
                         Log.e("vision",i+message);
+
+                        Cloud_Data temp=new Cloud_Data();
+                        temp.setDescription(responses.get(0).getLabelAnnotations().get(i).getDescription());
+                        temp.setScore(responses.get(0).getLabelAnnotations().get(i).getScore());
+
+                        data.add(temp);
                     }
 
 
@@ -119,14 +133,26 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            result.setText(finalResult);
+//                            result.setText(finalResult);
+
+                            setRecyclerView();
                         }
                     });
+
 
                 } catch(Exception e) {
                     Log.d("ERROR", e.getMessage());
                 }
             }
         });
+    }
+
+    public void setRecyclerView(){
+        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
+        layoutManager.setAutoMeasureEnabled(true);
+        description_rv.setLayoutManager(layoutManager);
+        description_rv.setNestedScrollingEnabled(false);
+        Description_RV_Adatper adatper=new Description_RV_Adatper(data,this);
+        description_rv.setAdapter(adatper);
     }
 }
