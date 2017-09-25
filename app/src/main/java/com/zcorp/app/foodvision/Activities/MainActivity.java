@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         Vision.Builder visionBuilder = new Vision.Builder(new NetHttpTransport(), new AndroidJsonFactory(),null);
-        visionBuilder.setVisionRequestInitializer(new VisionRequestInitializer(getString(R.string.YOUR_API_KEY)));
+        visionBuilder.setVisionRequestInitializer(new VisionRequestInitializer(getString(R.string.GOOGLE_CLOUD_API)));
 
         vision= visionBuilder.build();
 

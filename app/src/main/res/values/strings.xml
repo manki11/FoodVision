@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">FoodVision</string>
-    <string name="YOUR_API_KEY">AIzaSyAk5f22hrw92vm8GKDD2OptvhsqD4O1lwM</string>
+    <string name="GOOGLE_CLOUD_API">AIzaSyAk5f22hrw92vm8GKDD2OptvhsqD4O1lwM</string>
+    <string name="NUTRITIONX_API_KEY">005d9aec8d421a890e6c535742e18d22</string>
+    <string name="NUTRITIONX_APP_ID">0c9a65d7</string>
 </resources>
